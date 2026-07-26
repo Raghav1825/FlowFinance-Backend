@@ -36,7 +36,28 @@ const transactionSchema = new Schema(
         trip_id:{
             type:Schema.Types.ObjectId,
             ref:"Trip"
-        }
+        },
+        paidBy:{
+            type:Schema.Types.ObjectId,
+            ref:"User"
+        },
+        splitType:{
+            type:String,
+            enum:['EQUAL', 'EXACT', 'PERCENTAGE']
+        },
+        splits:[
+            {
+                user_id:{
+                    type:Schema.Types.ObjectId,
+                    ref:"User",
+                    required:true
+                },
+                amountOwed:{
+                    type:Number,
+                    required:true
+                }
+            }
+        ]
     },
     {timestamps:true}
 );
